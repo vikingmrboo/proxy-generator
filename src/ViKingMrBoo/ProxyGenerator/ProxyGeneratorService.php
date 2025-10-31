@@ -56,9 +56,9 @@ class ProxyGeneratorService
 namespace {$this->proxyGenerator->getProxyNamespace()};
 
 use {$this->proxyGenerator->getProxyNamespace()}\\AbstractClient;
-use {$reflectionClass->getNamespaceName()}\\{$reflectionClass->getShortName()};
+use {$method->getDeclaringClass()->getNamespaceName()}\\{$method->getDeclaringClass()->getShortName()};
 
-class $proxyClassName extends AbstractClient implements {$reflectionClass->getShortName()}
+class $proxyClassName extends AbstractClient implements {$method->getDeclaringClass()->getShortName()}
 {
     $methodsCode
 }
