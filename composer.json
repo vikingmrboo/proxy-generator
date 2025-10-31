@@ -1,6 +1,7 @@
 {
     "name": "vikingmrboo/proxy-generator",
     "description": "Dynamic proxy class generator for Symfony and Doctrine",
+    "version": "v0.1.1",
     "type": "library",
     "license": "MIT",
     "authors": [
