@@ -13,7 +13,10 @@
 
 ```bash
 composer require vikingmrboo/proxy-generator
+```
+
 Если вы используете Symfony Flex, бандл автоматически зарегистрируется. Если нет, добавьте его в config/bundles.php:
+
 ```php
 <?php
 
