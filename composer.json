@@ -1,0 +1,26 @@
+{
+    "name": "vikingmrboo/proxy-generator",
+    "description": "Dynamic proxy class generator for Symfony and Doctrine",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ViKingMrBoo",
+            "email": "viking@xakep.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ViKingMrBoo\\ProxyGenerator\\": "src/ViKingMrBoo/ProxyGenerator/"
+        }
+    },
+    "require": {
+        "doctrine/common": "^3.0",
+        "doctrine/orm": "^2.8",
+        "doctrine/cache": "^2.0",
+        "symfony/framework-bundle": "^5.0|^4.0|^3.4|^2.8",
+        "symfony/config": "^5.0|^4.0|^3.4|^2.8",
+        "symfony/dependency-injection": "^5.0|^4.0|^3.4|^2.8",
+        "symfony/console": "^5.0|^4.0|^3.4|^2.8"
+    }
+}

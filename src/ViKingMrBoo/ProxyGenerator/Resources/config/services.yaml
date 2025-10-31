@@ -1,0 +1,31 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+  
+  ViKingMrBoo\ProxyGenerator\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+  
+  ViKingMrBoo\ProxyGenerator\ProxyGeneratorService:
+    arguments:
+      $proxyGenerator: '@doctrine.proxy_generator'
+      $annotationReader: '@annotation_reader'
+      $cache: '@mega_coder_proxy_generator.proxy_cache_service'
+  
+  ViKingMrBoo\ProxyGenerator\ProxyCacheService:
+    arguments:
+      $cache: '@doctrine.cache.providers.doctrine_file_cache'
+  
+  ViKingMrBoo\ProxyGenerator\ProxyIntegrationService:
+    arguments:
+      $proxyGeneratorService: '@ViKingMrBoo\ProxyGenerator\ProxyGeneratorService'
+      $proxyCacheService: '@ViKingMrBoo\ProxyGenerator\ProxyCacheService'
+  
+  ViKingMrBoo\ProxyGenerator\AbstractClient:
+    abstract: true
+    public: false
+  
+  ViKingMrBoo\ProxyGenerator\ProxyGeneratorBundle:
+    public: false
