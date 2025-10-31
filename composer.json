@@ -11,7 +11,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "ViKingMrBoo\\ProxyGenerator\\": "src/ViKingMrBoo/ProxyGenerator/"
+            "ViKingMrBoo\\ProxyGenerator\\": "src/ViKingMrBoo/ProxyGenerator/",
+            "Tests\\ViKingMrBoo\\ProxyGenerator\\": "tests/ViKingMrBoo/ProxyGenerator/"
         }
     },
     "require": {
@@ -22,5 +23,8 @@
         "symfony/config": "^5.0|^4.0|^3.4|^2.8",
         "symfony/dependency-injection": "^5.0|^4.0|^3.4|^2.8",
         "symfony/console": "^5.0|^4.0|^3.4|^2.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }
