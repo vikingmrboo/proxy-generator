@@ -20,7 +20,7 @@ abstract class AbstractClient
     {
         $response = $this->httpClient->request($method, $url, [
             'body' => $body,
-            'timeout' => $options['options']['timeout'],
+            'timeout' => $options['timeout'],
         ]);
 
         return $response->getContent();

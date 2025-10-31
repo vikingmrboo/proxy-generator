@@ -1,4 +1,5 @@
 <?php
+
 namespace ViKingMrBoo\ProxyGenerator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -55,9 +56,9 @@ class ProxyGeneratorService
 namespace {$this->proxyGenerator->getProxyNamespace()};
 
 use {$this->proxyGenerator->getProxyNamespace()}\\AbstractClient;
-use {$method->getDeclaringClass()->getNamespaceName()}\\{$method->getDeclaringClass()->getShortName()};
+use {$reflectionClass->getNamespaceName()}\\{$reflectionClass->getShortName()};
 
-class $proxyClassName extends AbstractClient implements {$method->getDeclaringClass()->getShortName()}
+class $proxyClassName extends AbstractClient implements {$reflectionClass->getShortName()}
 {
     $methodsCode
 }
@@ -89,7 +90,7 @@ PHP;
             $bodyCode = '$body = $this->serialize($' . $method->getParameters()[0]->getName() . ', \'json\');';
         }
 
-        $responseCode = '$response = $this->request("' . implode('|', $methods) . '", "' . $config['url'] . $path . '", ' . ($bodyCode ? '$body' : 'null') . ', ["options" => ["timeout" => "' . $timeout . '"], "name" => "' . $name . '"]);';
+        $responseCode = '$response = $this->request("' . implode('|', $methods) . '", "' . $config['url'] . $path . '", ' . ($bodyCode ? '$body' : 'null') . ', ["timeout" => "' . $timeout . '", "name" => "' . $name . '"]);';
 
         $returnType = $method->getReturnType();
         $returnTypeCode = $returnType ? $returnType->getName() : 'mixed';
