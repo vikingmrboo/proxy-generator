@@ -13,9 +13,19 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder->getRootNode()
             ->children()
-            ->scalarNode('cache_dir')->defaultValue('%kernel.cache_dir%/proxy')->end()
-            ->scalarNode('proxies_dir')->defaultValue('%kernel.cache_dir%/proxies')->end()
+                ->scalarNode('cache_dir')->defaultValue('%kernel.cache_dir%/proxy')->end()
+                ->scalarNode('proxies_dir')->defaultValue('%kernel.cache_dir%/proxies')->end()
+                ->arrayNode('clients')
+                    ->useAttributeAsKey('name')
+                        ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('url')->isRequired()->end()
+                            ->scalarNode('timeout')->isRequired()->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
+
 
         return $treeBuilder;
     }
