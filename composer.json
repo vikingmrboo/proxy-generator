@@ -1,7 +1,7 @@
 {
     "name": "vikingmrboo/proxy-generator",
     "description": "Dynamic proxy class generator for Symfony and Doctrine",
-    "version": "v0.1.5",
+    "version": "v0.1.6",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -19,12 +19,12 @@
     "require": {
         "doctrine/common": "^3.5",
         "doctrine/orm": "^2.8",
-        "doctrine/cache": "^2.2",
+        "doctrine/cache": "^2.0",
         "symfony/framework-bundle": "^5.0|^4.0|^3.4|^2.8",
         "symfony/config": "^5.0|^4.0|^3.4|^2.8",
         "symfony/dependency-injection": "^5.0|^4.0|^3.4|^2.8",
         "symfony/console": "^5.0|^4.0|^3.4|^2.8",
-        "doctrine/annotations": "^2",
+        "doctrine/annotations": "^1",
         "symfony/http-client": "^v5.4"
     },
     "require-dev": {
