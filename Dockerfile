@@ -2,16 +2,12 @@ FROM php:7.4-cli
 
 # Устанавливаем необходимые пакеты
 RUN apt-get update && apt-get install -y \
-    git \
     unzip \
     libzip-dev \
     && docker-php-ext-install zip
 
 # Устанавливаем Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Устанавливаем Xdebug для отладки (опционально)
-RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Устанавливаем необходимые расширения PHP
 RUN docker-php-ext-install pdo pdo_mysql
