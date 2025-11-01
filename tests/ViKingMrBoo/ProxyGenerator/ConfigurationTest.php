@@ -13,7 +13,7 @@ class ConfigurationTest extends TestCase
         $treeBuilder = $configuration->getConfigTreeBuilder();
         $rootNode = $treeBuilder->buildTree();
 
-        $this->assertEquals('mega_coder_proxy_generator', $rootNode->getName());
+        $this->assertEquals('viking_proxy_generator', $rootNode->getName());
         $children = $rootNode->getChildren();
         $this->assertArrayHasKey('cache_dir', $children);
         $this->assertArrayHasKey('proxies_dir', $children);

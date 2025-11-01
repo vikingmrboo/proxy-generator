@@ -8,24 +8,20 @@ services:
     resource: '../../*'
     exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
   
-  ViKingMrBoo\ProxyGenerator\ProxyGeneratorService:
+  ViKingMrBoo\ProxyGenerator\VikingProxyGeneratorService:
     arguments:
       $proxyGenerator: '@doctrine.proxy_generator'
       $annotationReader: '@annotation_reader'
-      $cache: '@mega_coder_proxy_generator.proxy_cache_service'
-  
-  ViKingMrBoo\ProxyGenerator\ProxyCacheService:
+      $cache: '@viking_proxy_generator.proxy_cache_service'
+
+  viking_proxy_generator.proxy_cache_service:
+    class: ViKingMrBoo\ProxyGenerator\VikingProxyCacheService
     arguments:
       $cache: '@doctrine.cache.providers.doctrine_file_cache'
-  
-  ViKingMrBoo\ProxyGenerator\ProxyIntegrationService:
-    arguments:
-      $proxyGeneratorService: '@ViKingMrBoo\ProxyGenerator\ProxyGeneratorService'
-      $proxyCacheService: '@ViKingMrBoo\ProxyGenerator\ProxyCacheService'
   
   ViKingMrBoo\ProxyGenerator\AbstractClient:
     abstract: true
     public: false
   
-  ViKingMrBoo\ProxyGenerator\ProxyGeneratorBundle:
+  ViKingMrBoo\ProxyGenerator\VikingProxyGeneratorBundle:
     public: false

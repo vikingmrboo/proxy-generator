@@ -25,11 +25,6 @@ class VikingProxyGeneratorExtension extends Extension
         $container->setParameter('viking_proxy_generator.proxies_dir', $config['proxies_dir']);
         $container->setParameter('viking_proxy_generator.clients', $config['clients']);
 
-        // Регистрация компилятора с AnnotationReader
-        $annotationReader = new AnnotationReader();
-        $cacheProvider = new FilesystemAdapter($config['cache_dir']);
-        $container->addCompilerPass(new ProxyCompilerPass($annotationReader));
-
         // Регистрация кэша и HTTP клиента
         $container->register('viking_proxy_generator.cache_provider', FilesystemAdapter::class)
             ->setArguments([$config['cache_dir']]);

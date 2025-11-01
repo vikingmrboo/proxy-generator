@@ -30,11 +30,11 @@ class ViKingMrBooProxyGeneratorExtensionTest extends TestCase
             'proxies_dir' => '%kernel.cache_dir%/proxies',
         ]], $this->container);
 
-        $this->assertTrue($this->container->hasDefinition('mega_coder_proxy_generator.proxy_generator_service'));
-        $this->assertTrue($this->container->hasDefinition('mega_coder_proxy_generator.proxy_cache_service'));
-        $this->assertTrue($this->container->hasDefinition('mega_coder_proxy_generator.proxy_integration_service'));
+        $this->assertTrue($this->container->hasDefinition('viking_proxy_generator.proxy_generator_service'));
+        $this->assertTrue($this->container->hasDefinition('viking_proxy_generator.proxy_cache_service'));
+        $this->assertTrue($this->container->hasDefinition('viking_proxy_generator.proxy_integration_service'));
 
-        $this->assertEquals('%kernel.cache_dir%/proxy', $this->container->getParameter('mega_coder_proxy_generator.cache_dir'));
-        $this->assertEquals('%kernel.cache_dir%/proxies', $this->container->getParameter('mega_coder_proxy_generator.proxies_dir'));
+        $this->assertEquals('%kernel.cache_dir%/proxy', $this->container->getParameter('viking_proxy_generator.cache_dir'));
+        $this->assertEquals('%kernel.cache_dir%/proxies', $this->container->getParameter('viking_proxy_generator.proxies_dir'));
     }
 }

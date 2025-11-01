@@ -24,9 +24,9 @@ class ProxyCompilerPassTest extends TestCase
         $proxyCacheServiceDefinition = new Definition(ProxyCacheService::class);
         $proxyIntegrationServiceDefinition = new Definition(ProxyIntegrationService::class);
 
-        $this->containerBuilder->setDefinition('mega_coder_proxy_generator.proxy_generator_service', $proxyGeneratorServiceDefinition);
-        $this->containerBuilder->setDefinition('mega_coder_proxy_generator.proxy_cache_service', $proxyCacheServiceDefinition);
-        $this->containerBuilder->setDefinition('mega_coder_proxy_generator.proxy_integration_service', $proxyIntegrationServiceDefinition);
+        $this->containerBuilder->setDefinition('viking_proxy_generator.proxy_generator_service', $proxyGeneratorServiceDefinition);
+        $this->containerBuilder->setDefinition('viking_proxy_generator.proxy_cache_service', $proxyCacheServiceDefinition);
+        $this->containerBuilder->setDefinition('viking_proxy_generator.proxy_integration_service', $proxyIntegrationServiceDefinition);
     }
 
     public function testProcess()
@@ -39,7 +39,7 @@ class ProxyCompilerPassTest extends TestCase
         ];
 
         $serviceDefinition = new Definition();
-        $serviceDefinition->addTag('mega_coder.proxy', ['interface' => $interfaceName, 'config' => $config]);
+        $serviceDefinition->addTag('viking.proxy', ['interface' => $interfaceName, 'config' => $config]);
         $this->containerBuilder->setDefinition($serviceId, $serviceDefinition);
 
         $compilerPass = new ProxyCompilerPass();
