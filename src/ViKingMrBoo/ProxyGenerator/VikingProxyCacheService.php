@@ -3,7 +3,7 @@ namespace ViKingMrBoo\ProxyGenerator;
 
 use Doctrine\Common\Cache\CacheProvider;
 
-class ProxyCacheService
+class VikingProxyCacheService
 {
     private $cache;
 

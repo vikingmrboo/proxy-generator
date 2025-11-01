@@ -10,7 +10,7 @@ use ReflectionClass;
 use ReflectionMethod;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProxyGeneratorService
+class VikingProxyGeneratorService
 {
     private $proxyGenerator;
     private $annotationReader;

@@ -10,7 +10,7 @@ use ViKingMrBoo\ProxyGenerator\DependencyInjection\Compiler\ProxyCompilerPass;
 use Doctrine\Common\Cache\FilesystemCache;
 use Symfony\Contracts\HttpClient\HttpClientInterface as HttpClient;
 
-class ViKingMrBooProxyGeneratorExtension extends Extension
+class VikingProxyGeneratorExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
