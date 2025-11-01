@@ -30,7 +30,7 @@ class VikingProxyGeneratorService
             return $this->cache->fetch($cacheKey);
         }
 
-        $reflectionClass = new ReflectionClass($interfaceName);
+        $reflectionClass = new \ReflectionClass($interfaceName);
         $methods = $reflectionClass->getMethods();
 
         $proxyClassName = $interfaceName . 'Proxy';
@@ -65,7 +65,7 @@ class $proxyClassName extends AbstractClient implements {$method->getDeclaringCl
 PHP;
     }
 
-    private function generateMethodCode(ReflectionMethod $method, $config)
+    private function generateMethodCode(\ReflectionMethod $method, $config)
     {
         $routeAnnotation = $this->annotationReader->getMethodAnnotation($method, Route::class);
         if (!$routeAnnotation) {
@@ -76,6 +76,40 @@ PHP;
         $methods = $routeAnnotation->getMethods();
         $name = $routeAnnotation->getName();
         $options = $routeAnnotation->getOptions();
+        $parametersMap = [];
+
+        foreach ($method->getParameters() as $parameter) {
+            if (!$type = $parameter->getType()) {
+                $type = 'string';
+            } else {
+                $type = $type instanceof \ReflectionNamedType ? $type->getName() : (string) $type;
+            }
+
+            $parametersMap[$parameter->getName()] = $parameter;
+        }
+
+        $arguments = '';
+        $delimiter = '?';
+
+        if (preg_match_all('/(?:([a-zA-Z0-9_-]+)=)?\{([A-Za-z0-9_]+)}/', $path, $matches)) {
+            foreach ($matches[2] as $key => $match) {
+                if (!isset($parametersMap[$match])) {
+                    continue;
+                }
+
+                $parameter = $parametersMap[$match];
+
+                if (class_exists($parameter->getType())) {
+                    $parameterMetadata = new \ReflectionClass($parameter->getType());
+
+                    foreach ($parameterMetadata->getProperties() as $property) {
+                        if (!empty($matches[1][$key])) {
+
+                        }
+                    }
+                }
+            }
+        }
 
         $timeout = isset($options['timeout']) ? $options['timeout'] : $config['timeout'];
 
@@ -85,12 +119,11 @@ PHP;
         }
         $parametersCode = rtrim($parametersCode, ', ');
 
-        $bodyCode = '';
         if (in_array('POST', $methods)) {
-            $bodyCode = '$body = $this->serialize($' . $method->getParameters()[0]->getName() . ', \'json\');';
+            $bodyCode = '$body = $' . $method->getParameters()[0]->getName();
         }
 
-        $responseCode = '$response = $this->request("' . implode('|', $methods) . '", "' . $config['url'] . $path . '", ' . ($bodyCode ? '$body' : 'null') . ', ["timeout" => "' . $timeout . '", "name" => "' . $name . '"]);';
+        $responseCode = 'return $this->request("' . implode('|', $methods) . '", "' . $config['url'] . $path . '", ' . ($bodyCode ? '$body' : 'null') . ', ["timeout" => "' . $timeout . '", "name" => "' . $name . '"]);';
 
         $returnType = $method->getReturnType();
         $returnTypeCode = $returnType ? $returnType->getName() : 'mixed';
@@ -100,9 +133,16 @@ public function {$method->getName()}($parametersCode): $returnTypeCode
 {
     $bodyCode
     $responseCode
-    \$model = \$this->deserialize(\$response, {$returnTypeCode}::class);
-    return \$model;
 }
 PHP;
+    }
+
+    private static function processMatch(\ReflectionProperty $property, array $matches, int $matchIndex, \ReflectionParameter $parameter): string
+    {
+        if (!empty($matches[1][$matchIndex])) {
+            return "{$matches[1][$matchIndex]}=\${$property->getName()},";
+        }
+
+        return "\${$property->getName()},";
     }
 }
