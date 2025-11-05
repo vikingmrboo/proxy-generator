@@ -138,7 +138,7 @@ PHP;
                         }
 
                         $arguments .= "{$delimiter}{$property->getName()}={$propertyName}";
-                        $delimiter = '&,';
+                        $delimiter = '&';
                     }
 
                     $path = str_replace($matches[0][$key], $arguments, $path);
